@@ -1,0 +1,10 @@
+Immediate
+
+Remove 2D rendering technique
+Implement new 4D shapes
+Quaternion rotations
+
+Stretch Goals
+
+Reflections
+Refractions
