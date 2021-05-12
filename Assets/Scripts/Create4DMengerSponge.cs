@@ -6,11 +6,14 @@ using static Unity.Mathematics.math;
 public class Create4DMengerSponge : MonoBehaviour
 {
    public Shape4D hypercube;
+   
   
    void Start()
    {
-       for (int x=-1; x<=1; ++x)
-       {
+        // hypercube.shapeType = Shape4D.ShapeType.HyperCube;
+        // hypercube.operation = Shape4D.Operation.Union;
+        for (int x=-1; x<=1; ++x)
+        {
            for (int y=-1; y<=1; ++y)
            {
                 for (int z=-1; z<=1; ++z)
@@ -19,12 +22,11 @@ public class Create4DMengerSponge : MonoBehaviour
                     {
                         if ( (abs(x) + abs(y) + abs(z) + abs(w)) > 2 )
                         {
-                            Instantiate(hypercube, new Vector3(x,y,z), Quaternion.identity);   
+                            hypercube = Instantiate(hypercube, new Vector3(x,y,z), Quaternion.identity);
+                            hypercube.scaleW = 0.5f;
                             hypercube.positionW = w;
-                            hypercube.scaleW = 0.33f;
-                        }
-                        
-                        
+                            Debug.Log("<" + x + ", " + y + ", " + z + ", " + w + ">");
+                        } 
                     }
                 }
            }

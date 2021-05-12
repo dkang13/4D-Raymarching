@@ -3,7 +3,6 @@ Immediate
 Remove 2D rendering technique    DONE
 Camera Controls
 Implement new 4D shapes
-    Fractals
     Megner Sponge                DONE
 
 

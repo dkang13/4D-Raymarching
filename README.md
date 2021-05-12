@@ -7,3 +7,7 @@ What we did:
     - Change the camera setup for rendering higher-definition frames using Path Tracing
     - Implemented a few more 4D primitives:
         -
+
+What we borrowed:
+    - Raymarching framework
+    - basic distance functions for 4d objects
