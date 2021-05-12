@@ -3,7 +3,8 @@ Immediate
 Remove 2D rendering technique    DONE
 Camera Controls
 Implement new 4D shapes
-    Megner Sponge                DONE
+    Menger Sponge                DONE
+    Hyperellipse                 DONE
 
 
 Stretch Goals

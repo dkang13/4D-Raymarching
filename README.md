@@ -5,9 +5,11 @@ What we did:
     - Added reflection code to the ray marching shaders
     - Implemented a script for creating a Four Dimensional menger sponge
     - Change the camera setup for rendering higher-definition frames using Path Tracing
-    - Implemented a few more 4D primitives:
-        -
+    - Implemented 4D primitives:
+        - Hyperellipse
 
 What we borrowed:
     - Raymarching framework
     - basic distance functions for 4d objects
+
+On my honor, I, Dale Kang, swear I completed the eCIS course instructor survey and submitted it on time.
