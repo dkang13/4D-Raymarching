@@ -39,6 +39,21 @@ namespace Unity.Mathematics
             return length(p) - s;
         }
 
+        // 4D HyperEllipse
+        // s: radius
+        public float sdHyperellipse(float4 p, float4 s)
+        {
+            // calculate dist
+            float4 d = normalize(p);
+            d.x *= s.x;
+            d.y *= s.y;
+            d.z *= s.z;
+            d.w *= s.w;
+            float r = length(d);
+            return length(p) - r;
+        }
+        
+
         // http://eusebeia.dyndns.org/4d/duocylinder
         public float sdDuoCylinder(float4 p, float2 r1r2)
         {

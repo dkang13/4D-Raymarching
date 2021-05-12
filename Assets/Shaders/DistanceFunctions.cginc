@@ -25,6 +25,17 @@ float sdHypersphere (float4 p, float s)
     return length(p) - s;
 }
 
+float sdHyperellipse (float4 p, float4 s)
+{
+    float4 d = normalize(p);
+    d.x *= s.x;
+    d.y *= s.y;
+    d.z *= s.z;
+    d.w *= s.w;
+    float r = length(d);
+    return length(p) - r;
+}
+
 // http://eusebeia.dyndns.org/4d/duocylinder
 float sdDuoCylinder( float4 p, float2 r1r2) {
   float2 d = abs(float2(length(p.xz),length(p.yw))) - r1r2;

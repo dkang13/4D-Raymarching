@@ -132,6 +132,10 @@ Shader "Raymarch/RaymarchCam"
                 else if (shape.shapeType == 6) {
                     return sd16Cell(p4D, shape.scale);
                 }
+                // HyperEllipse case
+                else if (shape.shapeType == 7) {
+                    return sdHyperellipse(p4D, shape.scale);
+                }
 
                 return _maxDistance;
             }
