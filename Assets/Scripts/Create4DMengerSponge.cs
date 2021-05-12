@@ -25,7 +25,6 @@ public class Create4DMengerSponge : MonoBehaviour
                             hypercube = Instantiate(hypercube, new Vector3(x,y,z), Quaternion.identity);
                             hypercube.scaleW = 0.5f;
                             hypercube.positionW = w;
-                            Debug.Log("<" + x + ", " + y + ", " + z + ", " + w + ">");
                         } 
                     }
                 }
