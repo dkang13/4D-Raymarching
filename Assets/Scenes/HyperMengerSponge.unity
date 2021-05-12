@@ -385,7 +385,7 @@ PrefabInstance:
     - target: {fileID: 7220340402648136972, guid: 574545eca55884a07aeff49f3d3ef266,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 7220340402648136972, guid: 574545eca55884a07aeff49f3d3ef266,
         type: 3}
@@ -400,7 +400,7 @@ PrefabInstance:
     - target: {fileID: 7220340402648136972, guid: 574545eca55884a07aeff49f3d3ef266,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: 7220340402648136972, guid: 574545eca55884a07aeff49f3d3ef266,
         type: 3}
@@ -410,7 +410,7 @@ PrefabInstance:
     - target: {fileID: 7220340402648136972, guid: 574545eca55884a07aeff49f3d3ef266,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 7220340402648136972, guid: 574545eca55884a07aeff49f3d3ef266,
         type: 3}
@@ -455,21 +455,36 @@ PrefabInstance:
     - target: {fileID: 7220340402648136979, guid: 574545eca55884a07aeff49f3d3ef266,
         type: 3}
       propertyPath: rotationW.x
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7220340402648136979, guid: 574545eca55884a07aeff49f3d3ef266,
         type: 3}
       propertyPath: rotationW.y
-      value: 0
+      value: -83
       objectReference: {fileID: 0}
     - target: {fileID: 7220340402648136979, guid: 574545eca55884a07aeff49f3d3ef266,
         type: 3}
       propertyPath: rotationW.z
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7220340402648136979, guid: 574545eca55884a07aeff49f3d3ef266,
         type: 3}
       propertyPath: scaleW
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220340402648136979, guid: 574545eca55884a07aeff49f3d3ef266,
+        type: 3}
+      propertyPath: colour.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220340402648136979, guid: 574545eca55884a07aeff49f3d3ef266,
+        type: 3}
+      propertyPath: colour.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220340402648136979, guid: 574545eca55884a07aeff49f3d3ef266,
+        type: 3}
+      propertyPath: colour.b
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
