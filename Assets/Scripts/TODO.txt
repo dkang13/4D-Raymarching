@@ -1,7 +1,9 @@
 Immediate
 
-Remove 2D rendering technique
+Remove 2D rendering technique    DONE
 Implement new 4D shapes
+    Fractals
+    Megner Sponge
 Quaternion rotations
 
 Stretch Goals

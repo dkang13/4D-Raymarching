@@ -40,7 +40,6 @@ Shader "Raymarch/RaymarchCam"
             uniform float _aoIntensity;
 
             uniform float3 _lightDir;
-            uniform float3 _player;
             uniform fixed4 _skyColor;
 
             uniform int _useNormal;
@@ -196,7 +195,7 @@ Shader "Raymarch/RaymarchCam"
                 float res = 1.0;
                 for( float t=mint; t<maxt; )
                 {
-                    float h = min(distanceField(ro + rd*t).x, sdVerticalCapsule(ro + rd*t - _player, 1, 0.5));
+                    float h = distanceField(ro + rd*t).x;
                     if( h<0.001 )
                         return 0.0;
                     t += h;
