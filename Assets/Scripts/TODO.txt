@@ -1,12 +1,13 @@
 Immediate
 
 Remove 2D rendering technique    DONE
+Camera Controls
 Implement new 4D shapes
     Fractals
     Megner Sponge
-Quaternion rotations
+
 
 Stretch Goals
 
-Reflections
-Refractions
+Reflections     DONE
+Quaternion rotations

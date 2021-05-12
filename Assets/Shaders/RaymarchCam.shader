@@ -46,6 +46,8 @@ Shader "Raymarch/RaymarchCam"
             uniform int _useShadow;
 
             static const float PI = 3.14159265f;
+            static const float reflectivity = 0.05;
+            static const bool useReflections = false;
 
             struct Shape {
 
@@ -362,13 +364,17 @@ Shader "Raymarch/RaymarchCam"
 
                         float ao = (1 - 2 * i/float(_max_iteration)) * (1 - _aoIntensity) + _aoIntensity; // ambient occlusion
 
-                        //r=d−2(d⋅n)n
-                        float reflectivity = 0.05;
-                        float3 n = getNormal(p);
-                        float3 reflectDir = rd - 2*(dot(rd, normalize(n))) * normalize(n);
-                        float3 reflectiveColor = (raymarching2(p-(rd*0.01), reflectDir, depth))*reflectivity;
+                        float3 colorLight;
 
-                        float3 colorLight = float3 (color * light * shadow * ao + reflectiveColor); // multiplying all values between 0 and 1 to return final color
+                        if (useReflections) {
+                            float3 n = getNormal(p);
+                            float3 reflectDir = rd - 2*(dot(rd, normalize(n))) * normalize(n);
+                            float3 reflectiveColor = (raymarching2(p-(rd*0.01), reflectDir, depth))*reflectivity;
+                            colorLight = float3 (color * light * shadow * ao + reflectiveColor);
+                        }
+                        else {
+                            colorLight = float3 (color * light * shadow * ao); // multiplying all values between 0 and 1 to return final color
+                        }
 
                         colorDepth = float3 (colorLight*(_maxDistance-t)/(_maxDistance) + _skyColor.rgb*(t)/(_maxDistance)); // multiplying with distance
 
