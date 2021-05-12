@@ -1,3 +1,6 @@
+James Stuedemann js95655
+Dale Kang dmk2489
+
 # 4D-Rendering
 Based on a Unity framework for 4 dimentional raymarching
 
