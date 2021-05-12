@@ -40,7 +40,6 @@ Shader "Raymarch/RaymarchCam"
             uniform float _aoIntensity;
 
             uniform float3 _lightDir;
-            uniform float3 _player;
             uniform fixed4 _skyColor;
 
             uniform int _useNormal;
@@ -196,7 +195,7 @@ Shader "Raymarch/RaymarchCam"
                 float res = 1.0;
                 for( float t=mint; t<maxt; )
                 {
-                    float h = min(distanceField(ro + rd*t).x, sdVerticalCapsule(ro + rd*t - _player, 1, 0.5));
+                    float h = distanceField(ro + rd*t).x;
                     if( h<0.001 )
                         return 0.0;
                     t += h;
@@ -222,6 +221,84 @@ Shader "Raymarch/RaymarchCam"
                     t += h;
                 }
                 return res;
+            }
+
+            fixed4 raymarching2(float3 ro, float3 rd, float depth)
+            {
+
+                fixed4 result = fixed4(0,0,0,0.5); // default
+
+                float t = 0; //distance traveled
+
+
+                for (int i = 0; i < _max_iteration; i++)
+                {
+                    //sends out ray from the camera
+                    float3 p = ro + rd * t;
+
+
+
+                    // check if to far
+                    if(t > _maxDistance || t >= depth)
+                    {
+
+                        //environment
+                        result = fixed4(1, 1, 1, 0);
+                        break;
+
+                    }
+
+                    //return distance to fractal
+                    float4 d = (distanceField(p));
+
+
+                    if ((d.x) < _precision) //hit
+                    {
+                        float3 colorDepth;
+                        float light;
+                        float shadow;
+                        //shading
+
+                        float3 color = d.yzw;
+
+                        if(_useNormal == 1){
+                            float3 n = getNormal(p);
+                            light = dot(-_lightDir, n); //lambertian shading
+                            if(_nrOfCascades > 0){
+                                light = floor(light * _nrOfCascades + 1)/(float)(_nrOfCascades);
+                            }
+                           
+                            light = light * (1 - _lightIntensity) + _lightIntensity;
+                        }
+                        else  light = 1;
+
+                        if(_useShadow == 1){
+                             shadow = (hardShadowCalc(p, -_lightDir, 0.1, _maxShadowDistance) * (1 - _shadowIntensity) + _shadowIntensity); // soft shadows
+
+                        }
+                        else if(_useShadow == 2){
+                            shadow = (softShadowCalc(p, -_lightDir, 0.1, _maxShadowDistance, _shadowSoftness) * (1 - _shadowIntensity) + _shadowIntensity); // soft shadows
+                        }
+                        else  shadow = 1;
+
+                        float ao = (1 - 2 * i/float(_max_iteration)) * (1 - _aoIntensity) + _aoIntensity; // ambient occlusion
+
+                        float3 colorLight = float3 (color * light * shadow * ao); // multiplying all values between 0 and 1 to return final color
+
+                        colorDepth = float3 (colorLight*(_maxDistance-t)/(_maxDistance) + _skyColor.rgb*(t)/(_maxDistance)); // multiplying with distance
+
+                        //colorDepth = pow( colorDepth, (1.0/2.2) );
+                        result = fixed4(colorDepth ,1);
+                        break;
+
+                    }
+
+                    t += d.x;
+
+
+                }
+
+                return result;
             }
 
             // the actual raymarcher
@@ -285,7 +362,13 @@ Shader "Raymarch/RaymarchCam"
 
                         float ao = (1 - 2 * i/float(_max_iteration)) * (1 - _aoIntensity) + _aoIntensity; // ambient occlusion
 
-                        float3 colorLight = float3 (color * light * shadow * ao); // multiplying all values between 0 and 1 to return final color
+                        //r=d−2(d⋅n)n
+                        float reflectivity = 0.05;
+                        float3 n = getNormal(p);
+                        float3 reflectDir = rd - 2*(dot(rd, normalize(n))) * normalize(n);
+                        float3 reflectiveColor = (raymarching2(p-(rd*0.01), reflectDir, depth))*reflectivity;
+
+                        float3 colorLight = float3 (color * light * shadow * ao + reflectiveColor); // multiplying all values between 0 and 1 to return final color
 
                         colorDepth = float3 (colorLight*(_maxDistance-t)/(_maxDistance) + _skyColor.rgb*(t)/(_maxDistance)); // multiplying with distance
 
@@ -302,6 +385,10 @@ Shader "Raymarch/RaymarchCam"
 
                 return result;
             }
+
+            
+
+
             // the fragment shader
             fixed4 frag (v2f i) : SV_Target
             {
